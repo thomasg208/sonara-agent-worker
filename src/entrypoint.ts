@@ -90,13 +90,24 @@ export async function agent_entrypoint(ctx: JobContext) {
 // Default export is required for LiveKit Worker to find the entrypoint
 export default agent_entrypoint;
 
-// Self-run for "npm run dev" or "npm start"
-if (process.argv[1] === __filename || process.argv[1]?.endsWith('entrypoint.ts') || process.argv[1]?.endsWith('entrypoint.js')) {
+console.log('--- AGENT WORKER STARTING ---');
+console.log('Argv:', process.argv[1]);
+console.log('Filename:', __filename);
+
+// Robust check for entrypoint start
+const isEntrypoint = process.argv[1] === __filename ||
+    process.argv[1]?.includes('entrypoint.ts') ||
+    process.argv[1]?.includes('entrypoint.js');
+
+if (isEntrypoint) {
+    console.log('🟢 Starting LiveKit Agent Worker (CLI mode)...');
     cli.runApp(new ServerOptions({
-        agent: __filename,
+        agent: __filename, // In ESM, __filename is essentially the same as import.meta.url but as a path
         agentName: 'sonara-agent-worker',
         wsURL: config.livekit.url,
         apiKey: config.livekit.apiKey,
         apiSecret: config.livekit.apiSecret,
     }));
+} else {
+    console.log('🟡 Running in module mode (Waiting for explicit start)');
 }

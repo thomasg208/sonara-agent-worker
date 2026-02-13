@@ -1,0 +1,10 @@
+﻿[dotenv@17.3.1] injecting env (4) from .env -- tip: ≡ƒ¢í∩╕Å auth for agents: https://vestauth.com
+
+--- SONARA TOKEN GENERATED ---
+Room:  sonara-demo-room
+Participant:  strategic-executive-583
+
+TOKEN:
+eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InNvbmFyYS1kZW1vLXJvb20iLCJjYW5QdWJsaXNoIjp0cnVlLCJjYW5TdWJzY3JpYmUiOnRydWV9LCJpc3MiOiJBUEk5TTRpVHlFc2tBU0YiLCJleHAiOjE3NzA5ODkxMDMsIm5iZiI6MCwic3ViIjoic3RyYXRlZ2ljLWV4ZWN1dGl2ZS01ODMifQ.-jneSvKdu35KiyiffeNoPHKqBuLLKW1Z3QTq87hUvDw
+
+------------------------------
