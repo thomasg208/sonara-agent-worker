@@ -43,6 +43,7 @@ export async function agent_entrypoint(ctx: JobContext) {
     // Track response start/end for the greeting
     tracker.startResponse();
     await session.start({ agent, room: ctx.room });
+    console.log(`[Session Started] Agent is now live in room: ${ctx.room.name}`);
     console.log('Agent session started');
 
     // Auto-greet user on join
@@ -89,8 +90,8 @@ export async function agent_entrypoint(ctx: JobContext) {
 // Default export is required for LiveKit Worker to find the entrypoint
 export default agent_entrypoint;
 
-// Self-run for "npm run dev"
-if (process.argv[1] === __filename || process.argv[1]?.endsWith('entrypoint.ts')) {
+// Self-run for "npm run dev" or "npm start"
+if (process.argv[1] === __filename || process.argv[1]?.endsWith('entrypoint.ts') || process.argv[1]?.endsWith('entrypoint.js')) {
     cli.runApp(new ServerOptions({
         agent: __filename,
         agentName: 'sonara-agent-worker',
