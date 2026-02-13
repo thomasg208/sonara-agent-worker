@@ -12,10 +12,9 @@ import { config } from './config.js';
  */
 export function createAgent() {
     const model = new beta.realtime.RealtimeModel({
-        model: 'gemini-2.5-flash-native-audio-preview-09-2025',
+        model: 'gemini-2.0-flash-exp', // Using the standard Multimodal Live model
         voice: 'Puck',
         temperature: config.production.safeTemperatureBounds.default,
-        modalities: ['audio' as any],
     });
 
     console.log("Agent initialized");
