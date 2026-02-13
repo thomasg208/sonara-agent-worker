@@ -91,8 +91,6 @@ export async function agent_entrypoint(ctx: JobContext) {
 export default agent_entrypoint;
 
 console.log('--- AGENT WORKER STARTING ---');
-console.log('Argv:', process.argv[1]);
-console.log('Filename:', __filename);
 
 // Robust check for entrypoint start
 const isEntrypoint = process.argv[1] === __filename ||
@@ -100,6 +98,15 @@ const isEntrypoint = process.argv[1] === __filename ||
     process.argv[1]?.includes('entrypoint.js');
 
 if (isEntrypoint) {
+    // If no command (start, dev, download-files, etc) is provided, default to 'start' for production
+    const commands = ['start', 'dev', 'download-files', 'connect', '-h', '--help', '-V', '--version'];
+    const hasCommand = process.argv.some(arg => commands.includes(arg));
+
+    if (!hasCommand) {
+        process.argv.push('start');
+        console.log('ℹ️ No command provided, defaulting to "start"');
+    }
+
     console.log('🟢 Starting LiveKit Agent Worker (CLI mode)...');
     cli.runApp(new ServerOptions({
         agent: __filename, // In ESM, __filename is essentially the same as import.meta.url but as a path
